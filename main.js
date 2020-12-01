@@ -12,7 +12,7 @@ function createWindow() {
       nodeIntegration: true
     }
   })
-
+  //win.removeMenu()
   win.loadFile('index.html')
 
   if (process.env.NODE_ENV === 'dev') {

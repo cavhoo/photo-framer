@@ -5,6 +5,13 @@
     <title>Hello World!</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <style>
+      .content {
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+        place-content: center;
+        text-align: center;
+      }
      #thumbs {
        display: flex;
        flex-wrap: wrap;
@@ -12,29 +19,71 @@
      }
      .thumbnail {
        padding: 5px;
-       margin-right: 5px
+       margin-right: 5px;
+       position: relative;
+       display: flex;
+       place-content: center;
+       place-items: center;
      }
 
      .thumbnail:nth-child(5n) {
        margin-right: 0px;
      }
+
+     .waiting::before {
+      content: '⌚';
+      position: absolute;
+      font-size: 25px;
+      background-color: #ffffffd4;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      border-radius: 50px;
+     }
+
+     .done::before {
+      content: '✔';
+      position: absolute;
+      font-size: 25px;
+      color: #39ad42;
+      background-color: #ffffffd4;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      border-radius: 50px;
+     }
+
+     .outputOptions {
+       display: flex;
+       flex-direction: column;
+       width: 200px;
+     }
+
+     #padding, #output {
+       margin-bottom: 20px;
+     }
     </style>
 </head>
 <body style="background: white;">
-  <h1>Photo Framer</h1>
-  <div>
-    <h3>Loaded Images</h3>
-    <div
-      id="thumbs"
-    >
+  <div class="content">
+    <h1>Photo Framer</h1>
+    <div>
+      <h3>Loaded Images</h3>
+      <div
+        id="thumbs"
+      >
+      </div>
     </div>
-  </div>
-  <div>
-    <p>Output Options</p>
-    <input type="number" placeholder="Padding to add in PX" id="padding" />
-    <button>
-      Start Framing
-    </button>
+    <div class="outputOptions">
+      <p>Output Options</p>
+      <input type="number" placeholder="Padding to add in PX" id="padding" />
+      <input type="text" placeholder="Output path" id="output" />
+      <button
+        id="start"
+      >
+        Start Framing
+      </button>
+    </div>
   </div>
 
   <script src="index.js" type="text/javascript"></script>

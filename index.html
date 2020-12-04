@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <style>
       .content {
@@ -63,6 +64,9 @@
        margin-bottom: 20px;
      }
     </style>
+    <script>window.$ = window.jQuery = require('jquery')</script>
+    <script>window.popper = require('popper.js')</script>
+    <script>require('bootstrap')</script>
 </head>
 <body style="background: white;">
   <div class="content">
@@ -79,6 +83,8 @@
       <input type="number" placeholder="Padding to add in PX" id="padding" />
       <input type="text" placeholder="Output path" id="output" />
       <button
+        type="button"
+        class="btn btn-primary"
         id="start"
       >
         Start Framing

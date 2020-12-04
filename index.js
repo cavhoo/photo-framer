@@ -67,8 +67,8 @@ function startQueue() {
       .then((meta) => {
         const desiredPadding = getPadding()
         const widerThanTall = meta.width > meta.height
-        const paddingLR = widerThanTall ? desiredPadding : (meta.height - meta.width) / 2 + desiredPadding
-        const paddingTB = widerThanTall ? (meta.width - meta.height) / 2 + desiredPadding : desiredPadding
+        const paddingLR = widerThanTall ? desiredPadding : Math.floor((meta.height - meta.width) / 2) + desiredPadding
+        const paddingTB = widerThanTall ? Math.floor((meta.width - meta.height) / 2 + desiredPadding) : desiredPadding
         return image.extend({
           top: paddingTB,
           bottom: paddingTB,

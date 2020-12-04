@@ -1,19 +1,28 @@
 {
   "name": "photo-framer",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "App to square images with a padding",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "keywords": [],
+  "keywords": [
+    "Photos",
+    "Instagram",
+    "Squared",
+    "Padding"
+  ],
   "author": "Hendrik Mueller-Roehr",
   "license": "MIT",
   "dependencies": {
+    "@popperjs/core": "^2.5.4",
+    "bootstrap": "^4.5.3",
     "electron-squirrel-startup": "^1.0.0",
     "jimp": "^0.16.1",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
     "sharp": "^0.26.3"
   },
   "devDependencies": {

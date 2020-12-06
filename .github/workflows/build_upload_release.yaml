@@ -1,0 +1,30 @@
+# Workflow to build artifacts for all operating systems: Ubuntu, Windows and MacOS
+# This is split of the main workflow as github does not allow for multi upload
+
+name: Build Upload Artifact
+
+on:
+  repository_dispatch:
+    types: [build-artifact]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - run: npm ci
+      - run: npm run package
+      - name: Upload Artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.events.client_payload.upload_url }}
+          asset_path: ./out/make/dev/x64/

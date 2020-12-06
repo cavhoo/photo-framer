@@ -17,7 +17,6 @@
   "author": "Hendrik Mueller-Roehr",
   "license": "MIT",
   "dependencies": {
-    "@popperjs/core": "^2.5.4",
     "bootstrap": "^4.5.3",
     "electron-squirrel-startup": "^1.0.0",
     "jimp": "^0.16.1",
@@ -26,6 +25,7 @@
     "sharp": "^0.26.3"
   },
   "devDependencies": {
+    "semantic-release": "^17.3.0",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
@@ -51,10 +51,6 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
           "config": {}
         }
       ]

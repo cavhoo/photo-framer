@@ -7439,3 +7439,4 @@ found 0 vulnerabilities
 [21:43:16.231] Sending response:
     {"projectName":"/dev/null/inferredProject2*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"target":1,"jsx":1,"allowNonTsExtensions":true,"allowJs":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typings":["/home/hendrik/Workspace/Repos/photo-framer/node_modules/jimp/types/index.d.ts","/home/hendrik/.cache/typescript/4.0/node_modules/@types/sharp/index.d.ts","/home/hendrik/Workspace/Repos/photo-framer/node_modules/electron/electron.d.ts"],"unresolvedImports":[],"kind":"action::set"}
 [21:43:16.231] Response has been sent.
+[22:2:56.837] Parent process has exited, shutting down...

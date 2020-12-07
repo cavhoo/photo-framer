@@ -57,7 +57,7 @@ jobs:
           body: ${{ steps.changelog.outputs.clean_changelog }}
       - name: Dispatch release
         uses: peter-evans/repository-dispatch@v1
-        if: ${{ step.changelog.outputs.skipped == 'false' }}
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         with:
           token: ${{ secrets.PAT_DISPATCH }}
           repository: cavhoo/photo-framer

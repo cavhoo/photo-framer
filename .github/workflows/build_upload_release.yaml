@@ -27,7 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.events.client_payload.upload_url }}
+          upload_url: ${{ github.event.client_payload.upload_url }}
           asset_path: ./out/make/deb/x64/**/*.zip
       - name: Upload Artifact Windows
         if: ${{ matrix.os }} == 'windows-latest'
@@ -35,5 +35,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.events.client_playload.upload_url }}
+          upload_url: ${{ github.event.client_payload.upload_url }}
           asset_path: ./out/make/squirrel.windows/x64/**/*.exe

@@ -1,6 +1,6 @@
 {
   "name": "photo-framer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "App to square images with a padding",
   "main": "main.js",
   "scripts": {

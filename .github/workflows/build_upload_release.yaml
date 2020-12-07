@@ -21,10 +21,19 @@ jobs:
           node-version: "14"
       - run: npm ci
       - run: npm run package
-      - name: Upload Artifact
+      - name: Upload Artifact Ubuntu
+        if: ${{ matrix.os }} == "ubuntu-latest"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.events.client_payload.upload_url }}
-          asset_path: ./out/make/dev/x64/
+          asset_path: ./out/make/deb/x64/**/*.zip
+      - name: Upload Artifact Windows
+        if: ${{ matrix.os }} == "windows-latest"
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.events.client_playload.upload_url }}
+          asset_path: ./out/make/squirrel.windows/x64/**/*.exe

@@ -61,5 +61,5 @@ jobs:
         with:
           token: ${{ secrets.PAT_DISPATCH }}
           repository: cavhoo/photo-framer
-          event-type: 
+          event-type: "build-artifact"
           client-payload: '{"upload_url": "${{ steps.create_release.outputs.upload_url }}"}'

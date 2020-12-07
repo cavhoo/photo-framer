@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    if:  github.event == 'pull-request'
+    if:  github.event == "pull-request"
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -26,7 +26,7 @@ jobs:
       - run: npm run make
 
   release:
-    if: github.event == 'push'
+    if: github.event == "push"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

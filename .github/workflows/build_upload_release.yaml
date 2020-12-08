@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm ci
-      - run: npm run package
+      - run: npm run make
       - name: Upload Artifact Ubuntu
         if: ${{ matrix.os }} == 'ubuntu-latest'
         uses: actions/upload-release-asset@v1
@@ -28,16 +28,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.client_payload.upload_url }}
-          asset_path: ./out/make/deb/x64/**/*.zip
-          asset_name: photo-framer.ubuntu.zip
+          asset_path: "./out/make/deb/x64/photo-framer_${{ github.event.client_payload.version }}_amd64.deb"
+          asset_name: "photo-framer_${{ github.event.client_payload.version }}.ubuntu.deb"
           asset_content_type: application/zip
-      - name: Upload Artifact Windows
-        if: ${{ matrix.os }} == 'windows-latest'
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.client_payload.upload_url }}
-          asset_path: ./out/make/squirrel.windows/x64/**/*.exe
-          asset_name: photo-framer-setup.exe
-          asset_content_type: application/octet-stream
+ #     - name: Upload Artifact Windows
+ #       if: ${{ matrix.os }} == 'windows-latest'
+ #       uses: actions/upload-release-asset@v1
+ #       env:
+ #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ #       with:
+ #         upload_url: ${{ github.event.client_payload.upload_url }}
+ #         asset_path: ./out/make/squirrel.windows/x64/**/*.exe
+ #         asset_name: photo-framer-setup.exe
+ #         asset_content_type: application/octet-stream

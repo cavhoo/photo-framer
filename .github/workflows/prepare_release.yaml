@@ -38,7 +38,7 @@ jobs:
       - name: Test
         run: npm test
       - name: Build
-        run: npm run make
+        run: npm run package
       - name: Create Changelog
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
@@ -62,4 +62,7 @@ jobs:
           token: ${{ secrets.PAT_DISPATCH }}
           repository: cavhoo/photo-framer
           event-type: "build-artifact"
-          client-payload: '{"upload_url": "${{ steps.create_release.outputs.upload_url }}"}'
+          client-payload: '{
+          "upload_url": "${{ steps.create_release.outputs.upload_url }}"
+          "version": "${{ steps.changelog.outputs.version }}"
+          }'

@@ -1,3 +1,8 @@
+const jq = require('jquery')
+const pop = require('popper.js')
+const bootstrap = require('bootstrap')
+
+
 const {
   app,
   BrowserWindow
@@ -12,7 +17,11 @@ function createWindow() {
       nodeIntegration: true
     }
   })
-  win.removeMenu()
+
+  if (process.env.NODE_ENV !== 'dev') {
+    win.removeMenu()
+  }
+
   win.loadFile('index.html')
 
   if (process.env.NODE_ENV === 'dev') {

@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <title>Photo-Framer</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <style>
       .content {
@@ -69,29 +69,7 @@
     <script>require('bootstrap')</script>
 </head>
 <body style="background: white;">
-  <div class="content">
-    <h1>Photo Framer</h1>
-    <div>
-      <h3>Loaded Images</h3>
-      <div
-        id="thumbs"
-      >
-      </div>
-    </div>
-    <div class="outputOptions">
-      <p>Output Options</p>
-      <input type="number" placeholder="Padding to add in PX" id="padding" />
-      <input type="text" placeholder="Output path" id="output" />
-      <button
-        type="button"
-        class="btn btn-primary"
-        id="start"
-      >
-        Start Framing
-      </button>
-    </div>
-  </div>
-
+  <div class="content" id="content"></div>
   <script src="index.js" type="text/javascript"></script>
 </body>
 </html>

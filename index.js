@@ -2,15 +2,57 @@ const path = require('path')
 
 const sharp = require('sharp')
 
+const Framer = require('./src/framer')
+
 const allowedFormats = [
   'png',
   'jpg',
   'jpeg'
 ]
 
+const framerMain = new Framer()
 const imageQueue = []
-const thumbnails = []
 
+// Global Event Listeners
+function addDocumentListeners(dropHandler) {
+  document.addEventListener('drop', dropHandler)
+  document.addEventListener('dragenter', handleDragEnter)
+  document.addEventListener('dragleave', handleDragLeave)
+  document.addEventListener('dragover', (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+  })
+
+  //document.querySelector('#start').addEventListener('click', startQueue)
+}
+const handleDropImages =(images) => (event) => {
+  images.length = 0
+  event.stopPropagation()
+  event.preventDefault()
+
+  for (const img of event.dataTransfer.files) {
+    const isAllowed = allowedFormats.includes(path.parse(img.path).ext.substring(1))
+    if (isAllowed) {
+      if (!fileAlreadyAdded(images, img.path)) {
+        images.push(img)
+      }
+    }
+  }
+  framerMain.onAddImages(images)
+}
+
+
+// Main function
+function main() {
+  const images = []
+  framerMain.create()
+
+  addDocumentListeners(handleDropImages(images))
+  const content = document.querySelector('#content')
+  content.appendChild(framerMain)
+}
+
+main()
 
 function getPaddingField() {
   return document.querySelector('#padding')
@@ -32,8 +74,8 @@ function getFileNameWOFormat(imgPath) {
   return path.parse(imgPath).name
 }
 
-function fileAlreadyAdded(path) {
-  return imageQueue.some(img => img.path === path)
+function fileAlreadyAdded(images, path) {
+  return images.some(img => img.path === path)
 }
 
 function createThumbnail(id, image) {
@@ -57,7 +99,7 @@ function generateThumbnailList() {
 }
 
 function startQueue() {
-  
+
   const outpath = document.querySelector('#output').value
 
   blockInput()
@@ -92,33 +134,14 @@ function startQueue() {
         console.log(error)
       })
   })
-  
+
   imageQueue.length = 0
 
   allowInput()
 }
 
-function handleDrop(event) {
-  event.stopPropagation()
-  event.preventDefault()
+function handleDrop(event) {}
 
-  for (const img of event.dataTransfer.files) {
-    const isAllowed = allowedFormats.includes(path.parse(img.path).ext.substring(1))
-    if (isAllowed) {
-      if (!fileAlreadyAdded(img.path)) {
-        imageQueue.push(img)
-      }
-    }
-  }
-
-  if (imageQueue.length > 0) {
-    const list = document.querySelector('#thumbs')
-    if (list) {
-      list.innerHTML = ""
-    }
-    generateThumbnailList()
-  }
-}
 
 function handleDragEnter(event) {
 
@@ -127,13 +150,3 @@ function handleDragEnter(event) {
 function handleDragLeave(event) {
 
 }
-
-document.addEventListener('drop', handleDrop)
-document.addEventListener('dragenter', handleDragEnter)
-document.addEventListener('dragleave', handleDragLeave)
-document.addEventListener('dragover', (e) => {
-  e.preventDefault()
-  e.stopPropagation()
-})
-
-document.querySelector('#start').addEventListener('click', startQueue)

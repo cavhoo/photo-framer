@@ -4,7 +4,6 @@
  * @property {string|number|any} value
  * */
 
-const Bootstrap = require('bootstrap')
 const BaseElement = require('../base-element')
 
 

@@ -1,8 +1,3 @@
-const jq = require('jquery')
-const pop = require('popper.js')
-const bootstrap = require('bootstrap')
-
-
 const {
   app,
   BrowserWindow

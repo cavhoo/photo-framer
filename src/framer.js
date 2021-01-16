@@ -4,7 +4,7 @@ const BaseElement = require('./base-element')
 const LabelElement = require('./components/label-element')
 const {ThumbnailList} = require('./components/thumbnaillist-element')
 const Button = require('./components/button-element')
-const Dropdown = require('./components/dropdown-element')
+const ExportOptions = require('./components/exportoptions-element')
 
 
 function getFileNameWOFormat(imgPath) {
@@ -16,35 +16,44 @@ class Framer extends BaseElement {
     this.images = []
     this.setAttribute('class', 'framer-window')
 
+    this.makeTitle()
+    this.makeThumbailComponent()
+    this.makeExportOptionsComponent()
+    this.makeStartButtonComponent()
+    return this
+  }
+
+  makeTitle() {
     const title = new LabelElement().create({
       text: 'Photo Framer',
       type: 'h1'
     })
 
     this.addItem(title)
+  }
 
+  makeThumbailComponent() {
     this.thumbnails = new ThumbnailList().create([])
     this.addItem(this.thumbnails)
+  }
 
-    this.exportMode = new Dropdown().create(
-      'Output Format',
-      [
-        {label: 'JPG', value: 0},
-        {label: 'PNG', value: 1}
-      ],
-      (event) => console.log(event)
-    )
+  makeExportOptionsComponent() {
+    const container = document.createElement('div')
+    this.exportMode = new ExportOptions().create()
+    container.appendChild(this.exportMode)
 
-    this.addItem(this.exportMode)
 
+
+    this.addItem(container)
+  }
+
+  makeStartButtonComponent() {
     const buttonProps = {
       title: 'Start Framing',
       onClickCallback: this.onStartProcess
     }
     const startBtn = new Button().create(buttonProps)
     this.addItem(startBtn)
-
-    return this
   }
 
   onAddImages(images) {

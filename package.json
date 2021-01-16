@@ -1,39 +1,67 @@
 {
   "name": "photo-framer",
   "version": "1.1.7",
+  "private": true,
   "description": "App to square images with a padding",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+  "author": {
+    "name": "Hendrik Mueller-Roehr"
   },
-  "keywords": [
-    "Photos",
-    "Instagram",
-    "Squared",
-    "Padding"
-  ],
-  "author": "Hendrik Mueller-Roehr",
-  "license": "MIT",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "make": "electron-forge make",
+    "package": "electron-forge package",
+    "start": "electron-forge start"
+  },
+  "main": "main.js",
   "dependencies": {
     "bootstrap": "^4.5.3",
+    "core-js": "^3.6.5",
     "electron-squirrel-startup": "^1.0.0",
     "event-kit": "^2.5.3",
     "jimp": "^0.16.1",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
-    "sharp": "^0.26.3"
+    "sharp": "^0.26.3",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
-    "semantic-release": "^17.3.0",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron": "^11.0.3"
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "electron": "^11.0.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "semantic-release": "^17.3.0",
+    "vue-template-compiler": "^2.6.11"
   },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "_id": "photo-framer@1.1.7",
   "config": {
     "forge": {
       "packagerConfig": {
@@ -58,5 +86,13 @@
         }
       ]
     }
-  }
+  },
+  "keywords": [
+    "Photos",
+    "Instagram",
+    "Squared",
+    "Padding"
+  ],
+  "license": "MIT",
+  "readme": "ERROR: No README data found!"
 }

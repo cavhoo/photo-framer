@@ -13,13 +13,13 @@ function createWindow() {
     }
   })
 
-  if (process.env.NODE_ENV !== 'dev') {
+  if (process.env.NODE_ENV !== 'development') {
     win.removeMenu()
   }
 
   win.loadFile('index.html')
 
-  if (process.env.NODE_ENV === 'dev') {
+  if (process.env.NODE_ENV === 'development') {
     win.webContents.openDevTools()
   }
 }

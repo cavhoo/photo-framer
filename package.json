@@ -10,11 +10,15 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
     "make": "electron-forge make",
     "package": "electron-forge package",
-    "start": "electron-forge start"
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
+    "start": "npm run electron:serve"
   },
-  "main": "main.js",
+  "main": "background.js",
   "dependencies": {
     "bootstrap": "^4.5.3",
     "core-js": "^3.6.5",
@@ -24,7 +28,9 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "sharp": "^0.26.3",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-material": "^1.0.0-beta-15",
+    "vuex": "^3.6.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",
@@ -37,9 +43,11 @@
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "electron": "^11.0.3",
+    "electron-devtools-installer": "^3.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "semantic-release": "^17.3.0",
+    "vue-cli-plugin-electron-builder": "~2.0.0-rc.5",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

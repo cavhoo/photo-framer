@@ -1,26 +1,16 @@
 <template>
   <div id="app">
-    <Framer />
+    <framer />
   </div>
 </template>
 
 <script>
- import Framer from './components/Framer'
- export default {
-   name: 'App',
-   components: {
-     Framer
-   }
-}
+import Framer from './components/Framer.vue';
+export default {
+  components: { Framer },
+  name: 'App',
+  data: () => ({
+    //
+  }),
+};
 </script>
-
-<style>
-#app {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

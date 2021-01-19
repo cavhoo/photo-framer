@@ -1,12 +1,9 @@
 module.exports = {
-  configureWebpack: {
-    mode: 'development'
+  "configureWebpack": {
+    "mode": "development"
   },
-  pluginOptions: {
-    chainWebpackRendererProcess: (config) => {
-      return {
-        mode: 'development'
-      }
-    }
-  }
+  "pluginOptions": {},
+  "transpileDependencies": [
+    "vuetify"
+  ]
 }

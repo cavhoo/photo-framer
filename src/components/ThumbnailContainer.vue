@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="thumbnail-container">
     <Thumbnail
       v-for='img in images'
       :key='img.name'
       :path='img.path'
+      :status='img.status'
     />
   </div>
 </template>
@@ -16,6 +17,9 @@
    components: {
      Thumbnail
    },
+   props: {
+
+   },
    computed: {
      ...mapGetters({
        images: 'images/images',
@@ -27,6 +31,10 @@
 </script>
 
 
-<style>
-
+<style scoped>
+  .thumbnail-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 </style>

@@ -1,5 +1,5 @@
 'use strict'
-
+import path from 'path'
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
@@ -11,6 +11,19 @@ protocol.registerSchemesAsPrivileged([
 ])
 
 async function createWindow() {
+  const protocolName = 'safe-file'
+
+  protocol.registerFileProtocol(protocolName, (request, callback) => {
+    const url = request.url.replace(`${protocolName}://`, '')
+    try {
+      return callback(decodeURIComponent(url))
+    }
+    catch (error) {
+      // Handle the error as needed
+      console.error(error)
+    }
+  })
+
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,

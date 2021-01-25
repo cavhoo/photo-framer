@@ -1,7 +1,10 @@
 <template>
-  <div id="app">
-    <framer />
-  </div>
+  <v-app>
+    <div id="app">
+      <h1 class="app-title">Photo-Framer</h1>
+      <Framer />
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -14,3 +17,15 @@ export default {
   }),
 };
 </script>
+
+<style scoped>
+ .app-title {
+   text-align: center;
+   font-size: 4rem
+ }
+</style>
+<style>
+ html {
+   font-size: 18px;
+ }
+</style>

@@ -1,7 +1,14 @@
+const path = require('path')
+const allowedFormats = [
+  '.png',
+  '.jpg',
+  '.jpeg'
+]
+
 const state = () => ({
   images: []
 })
-
+   
 const getters = {
   images: (state) => {
     return state.images
@@ -14,7 +21,18 @@ const getters = {
 const actions = {
   addImages: ({ commit }, images) => {
     commit('resetImages')
-    commit('setImages', { images })
+
+    const parsedImages = []
+
+    for (const img of images) {
+      if (allowedFormats.includes(path.extname(img.path)))
+      parsedImages.push({
+        path: `safe-file://${img.path}`,
+        name: img.name,
+        status: 'pending'
+      })
+    }
+    commit('setImages', { images: parsedImages })
   }
 }
 

@@ -1,62 +1,73 @@
 <template>
-  <div
-    class='main'
+  <v-card
+    elevation="5"
+    class="main"
     @dragenter.prevent
     @dragover.prevent
     @drop='onDrop($event, 1)'
   >
-    <p>
-      Drop Images here
-    </p>
-  </div>
+    <template
+      v-if="count === 0"
+    >
+      <md-empty-state
+        md-icon="add_photo_alternate"
+        md-label="Drop Images here"
+        md-description="Drag and drop images from your computer here to add them" />
+    </template>
+    <template
+      v-if="count > 0"
+    >
+      <div
+        class="pending-images"
+      >
+        <h3>Pending Images</h3>
+        <thumbnail-container />
+      </div>
+    </template>
+    </v-card>
 </template>
 
 
 <script>
- import path from 'path'
- import { mapState, mapActions } from 'vuex'
+  import { mapState, mapGetters, mapActions } from 'vuex'
+  import ThumbnailContainer from './ThumbnailContainer'
+  export default {
+    computed: {
+      ...mapState({
+        images: state => state.images
+      }),
+      ...mapGetters({
+        count: 'images/imageCount'
+      })
+    },
+    components: {
+      ThumbnailContainer
+    },
+    name:
+      'ImageDropZone',
+    methods: {
+      ...mapActions('images', [
+        'addImages'
+      ]),
+      onDrop(event) {
+        event.stopPropagation()
+        event.preventDefault()
+        
+        this.addImages(event.dataTransfer.files)
+      }
+    }
 
- const allowedFormats = [
-   '.png',
-   '.jpg',
-   '.jpeg'
- ]
-
- export default {
-   computed: {
-     ...mapState({
-       images: state => state.images
-     })
-   },
-   name: 'ImageDropZone',
-   methods: {
-     ...mapActions('images', [
-       'addImages'
-     ]),
-     onDrop(event) {
-       event.stopPropagation()
-       event.preventDefault()
-       let images = []
-       for (const img of event.dataTransfer.files) {
-         const isAllowed = allowedFormats.includes(path.extname(img.path))
-         if (isAllowed) {
-           images.push({
-             path: `file:///${img.path}`,
-             name: img.name
-           })
-         }
-       }
-       this.addImages(images)
-     }
-   }
-
- }
+  }
 </script>
 
 <style scoped>
  .main {
-   width: 300px;
-   height: 200px;
-   background-color: green;
+   width: 80vw;
+   min-height: 400px;
+   margin: 0 auto;
+ }
+
+ .pending-images {
+   padding: 10px;
  }
 </style>

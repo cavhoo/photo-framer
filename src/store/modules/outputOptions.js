@@ -1,6 +1,9 @@
 const state = () => ({
   outputFormat: 'jpg',
-  outputOptions: {}
+  outputOptions: {
+    outputPath: '',
+    filePattern: '<name>_squared.<format>'
+  }
 })
 
 const getters = {
@@ -9,6 +12,9 @@ const getters = {
   },
   options: (state) => {
     return state.outputOptions
+  },
+  hasOutputPath: (state) => {
+    return state.outputOptions.outputPath.length > 0
   }
 }
 

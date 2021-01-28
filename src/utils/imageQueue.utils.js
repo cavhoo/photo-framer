@@ -13,7 +13,9 @@ import path from 'path'
  * Default ExportOptions
  * @typedef {Object} ExportOptions
  * @property {number} desiredPadding
- * @property {string} outputPath 
+ * @property {string} outputPath
+ * @property {string} filePattern
+ * @property {string} format
  */
 
 /**
@@ -22,26 +24,45 @@ import path from 'path'
  */
 const fileNameWithoutExtension = imgPath => path.parse(imgPath).name
 
+/**
+ * @oaram {[key: string]: string} values values to be inserted into new file name
+ * @param {string} pattern Pattern to be used when saving a file
+ */
+const makeFileName = (values, pattern) => {
+  let filename = pattern;
 
+  Object.keys(values).forEach((key) => {
+    filename.replace(`<${key}>`, values[key]);
+  })
+
+  return filename;
+}
 
 /**
  * Process an amount of images to add a frame around them
  * @param {ImageData[]} images 
  * @param {ExportOptions} options
  */
-const processImages = (images, options) => {
+export const processImages = (images, options) => {
   images.forEach(image => {
     const sharpedImage = sharp(image.path)
     sharpedImage.metadata()
     .then(meta => {
       const {
         desiredPadding,
-        outputPath
+        outputPath,
+        filePattern,
+        format
       } = options
       
       const widerThanTall = meta.width > meta.height
       const paddingLeftRight = widerThanTall ? desiredPadding : Math.floor((meta.height - meta.width) / 2) + desiredPadding
       const paddingTopBottom = widerThanTall ? Math.floor((meta.width - meta.height) / 2 + desiredPadding) : desiredPadding
+
+      const exportOptions = {
+        name: fileNameWithoutExtension(image.path),
+        format
+      }
 
       return sharpedImage.extend({
         top: paddingTopBottom,
@@ -54,9 +75,7 @@ const processImages = (images, options) => {
           b: 255,
           alpha: 1
         }
-      }).toFile(`${outputPath}/${fileNameWithoutExtension(image.path)}_squared.jpg`)
+      }).toFile(`${outputPath}/${makeFileName(exportOptions, filePattern)}_squared.jpg`)
     })
   })
 }
-
-export default processImages

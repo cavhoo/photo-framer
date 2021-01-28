@@ -12,7 +12,8 @@
       <v-btn
         elevation="2"
         color="primary"
-        :disabled="imgCount === 0"
+        :disabled="imgCount === 0 || !hasOutputPath"
+        @click="onStartProcessing($event, 1)"
       >
         Start
       </v-btn>
@@ -21,16 +22,21 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import CommonOutputOptions from './CommonOutputOptions.vue'
+ import { mapGetters } from 'vuex'
+ import CommonOutputOptions from './CommonOutputOptions.vue'
  import ImageDropZone from './ImageDropZone'
  import OutputFormatSelector from './OutputFormatSelector'
+
+ import { processImages } from '../utils/imageQueue.utils'
 
  export default {
    name: 'Framer',
    computed: {
      ...mapGetters({
-       imgCount: 'images/imageCount'
+       imgCount: 'images/imageCount',
+       images: 'images/images',
+       hasOutputPath: 'outputOptions/hasOutputPath',
+       ouputOptions: 'outputOptions/options'
      })
    },
    components: {
@@ -40,6 +46,15 @@ import CommonOutputOptions from './CommonOutputOptions.vue'
    },
    props: {
      msg: String
+   },
+   methods: {
+     onStartProcessing() {
+       console.log("Starting....")
+       processImages(
+         this.images,
+         this.outputOptions
+       )
+     }
    }
  }
 </script>
